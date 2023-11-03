@@ -1,0 +1,35 @@
+﻿<Application x:Class="Puzle.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Puzle"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <local:DoubleRound x:Key="intConverter"/>
+            <Style TargetType="local:PuzzleButton">
+                <Style.Triggers>
+                    <Trigger Property="Refresh" Value="True">
+                        <Trigger.EnterActions>
+                            <StopStoryboard BeginStoryboardName="stbFadeOut"/>
+                            <BeginStoryboard x:Name="stbFadeIn">
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                From="0.0" To="1.0" Duration="0:0:0.4"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="stbFadeIn"/>
+                            <BeginStoryboard x:Name="stbFadeOut">
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                            From="0.0" To="1.0" Duration="0:0:0.4"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
